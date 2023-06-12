@@ -25,6 +25,9 @@ const interval = setInterval(() => {
 		conversation.querySelector('.scroller-positioner').setAttribute('style', 'max-width: none;');
 		conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end;');
 		const welcome = conversation.querySelector('cib-welcome-container').shadowRoot;
+		welcome.querySelector('.container-logo').setAttribute('style', 'display: none;');
+		welcome.querySelector('.container-title').setAttribute('style', 'display: none;');
+		welcome.querySelector('.container-subTitle').setAttribute('style', 'display: none;');
 		welcome.querySelector('.container-item').setAttribute('style', 'display: none;');
 		welcome.querySelector('.learn-tog-item').setAttribute('style', 'display: none;');
 		welcome.querySelector('.privacy-statement').setAttribute('style', 'display: none;');
@@ -48,4 +51,4 @@ const interval = setInterval(() => {
 			}
 		});
 	}
-}, 500);
+}, 500); 
