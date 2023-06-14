@@ -23,7 +23,6 @@ const interval = setInterval(() => {
 		main.shadowRoot.querySelector('cib-serp-feedback').setAttribute('style', 'display: none;');
 		const conversation = main.shadowRoot.querySelector('cib-conversation').shadowRoot;
 		conversation.querySelector('.scroller-positioner').setAttribute('style', 'max-width: none;');
-		conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end;');
 		const welcome = conversation.querySelector('cib-welcome-container').shadowRoot;
 		welcome.querySelector('.container-logo').setAttribute('style', 'display: none;');
 		welcome.querySelector('.container-title').setAttribute('style', 'display: none;');
