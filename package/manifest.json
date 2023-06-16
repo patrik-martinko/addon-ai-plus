@@ -3,6 +3,9 @@
     "name": "Bing AI Plus",
     "description": "",
     "version": "1.0.0",
+    "permissions": [
+        "storage"
+    ],
     "content_scripts": [
         {
             "matches": [
@@ -18,8 +21,8 @@
         "48": "icon-48.png",
         "128": "icon-128.png"
     },
-    "permissions": [
-        "storage"
-    ],
-    "options_page": "options.html"
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true
+    }
 }
