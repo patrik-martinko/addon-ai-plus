@@ -1,11 +1,14 @@
 {
     "manifest_version": 3,
     "name": "Bing AI Plus",
-    "description": "",
+    "description": "Adds many features and gives options to the new Bing AI chatbot (Chat GPT-4).",
     "version": "1.0.0",
     "permissions": [
         "storage"
     ],
+    "background": {
+        "service_worker": "background.js"
+    },
     "content_scripts": [
         {
             "matches": [
