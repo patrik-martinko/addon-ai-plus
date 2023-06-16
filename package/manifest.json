@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Bing AI Plus",
-    "description": "Adds many features and gives options to the new Bing AI chatbot (Chat GPT-4).",
+    "description": "Adds many features and gives options to the new Bing AI chatbot (ChatGPT v4).",
     "version": "1.0.0",
     "permissions": [
         "storage"
