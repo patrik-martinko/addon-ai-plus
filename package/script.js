@@ -1,14 +1,18 @@
 const parameters = (new URLSearchParams(location.search));
-let query = parameters.get('q') ? decodeURIComponent(parameters.get('q')) : false;
+const query = parameters.get('q') ? decodeURIComponent(parameters.get('q')) : false;
 const interval = setInterval(() => {
 	let main = document.querySelector('cib-serp');
 	let bar;
+	let text;
 	let input;
 	if (main) {
 		bar = main.shadowRoot.querySelector('cib-action-bar');
 	}
 	if (bar) {
-		input = bar.shadowRoot.querySelector('#searchbox');
+		text = bar.shadowRoot.querySelector('cib-text-input');
+	}
+	if (text) {
+		input = text.shadowRoot.querySelector('#searchbox');
 	}
 	if (input) {
 		clearInterval(interval);
@@ -52,7 +56,7 @@ const interval = setInterval(() => {
 			const conversation = main.shadowRoot.querySelector('cib-conversation').shadowRoot;
 			if (options.center) {
 				conversation.querySelector('.scroller-positioner').setAttribute('style', 'max-width: none;');
-				conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end;');
+				conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end; padding-bottom: 0;');
 				main.shadowRoot.querySelector('cib-action-bar').setAttribute('style', 'max-width: none;');
 			}
 			if (options.rewards) {
@@ -68,7 +72,7 @@ const interval = setInterval(() => {
 				welcome.querySelector('.container-item').setAttribute('style', 'display: none;');
 			}
 			if (options.feedback) {
-				welcome.querySelector('.learn-tog-item').setAttribute('style', 'display: none;');
+				welcome.querySelector('.learn-tag-item').setAttribute('style', 'display: none;');
 				main.shadowRoot.querySelector('cib-serp-feedback').setAttribute('style', 'display: none;');
 			}
 			if (options.terms) {
