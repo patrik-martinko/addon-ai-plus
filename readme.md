@@ -4,7 +4,7 @@ Adds many features and gives options to the new Bing AI chatbot (ChatGPT v4).
 
 ## Features
 
-- Ability to automatically fill in the query from the URL parameter named 'q'
+- Ability to automatically fill in and send the query from the URL parameter named 'q'
 - Ability to hide (and show) the recent activity sidebar
 - Ability to center the chat
 - Ability to hide the rewards icon
