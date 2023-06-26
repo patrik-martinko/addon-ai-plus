@@ -1,4 +1,6 @@
-# ![Icon](package/icon-48.png) [Bing AI Plus](https://chrome.google.com/webstore/detail/fidegdolhcippkeobljodnicbeecghlm) ![Chrome Web Store](https://img.shields.io/chrome-web-store/users/fidegdolhcippkeobljodnicbeecghlm?color=black&label=Number%20of%20installations:)
+# ![Icon](package/icon-48.png) [Bing AI Plus](https://chrome.google.com/webstore/detail/fidegdolhcippkeobljodnicbeecghlm)
+
+![Chrome Web Store](https://img.shields.io/chrome-web-store/users/fidegdolhcippkeobljodnicbeecghlm?color=black&label=Number%20of%20installations:)
 
 Adds many features and gives options to the new Bing AI chatbot (ChatGPT v4).
 
@@ -12,3 +14,4 @@ Adds many features and gives options to the new Bing AI chatbot (ChatGPT v4).
 - Ability to hide the examples
 - Ability to hide the feedback text and links
 - Ability to hide the terms & privacy links
+- Ability to hide the color gradient on background 

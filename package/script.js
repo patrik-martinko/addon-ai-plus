@@ -78,6 +78,13 @@ const interval = setInterval(() => {
 			if (options.terms) {
 				welcome.querySelector('.privacy-statement').setAttribute('style', 'display: none;');
 			}
+			if (options.background) {
+				const setColor = element => {
+					element.setAttribute('style', 'background: #f5f5f5;');
+				};
+				setColor(main.shadowRoot.querySelector('cib-background'));
+				conversation.querySelectorAll('cib-background').forEach(element => setColor(element));
+			}
 		});
 	}
 }, 500);
