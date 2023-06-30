@@ -54,29 +54,49 @@ const interval = setInterval(() => {
 				});
 			}
 			const conversation = main.shadowRoot.querySelector('cib-conversation').shadowRoot;
+			const welcome = conversation.querySelector('cib-welcome-container').shadowRoot;
 			if (options.center) {
 				conversation.querySelector('.scroller-positioner').setAttribute('style', 'max-width: none;');
-				conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end; padding-bottom: 0;');
+				if (welcome.querySelector('.container-logo')) {
+					conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end; padding-bottom: 0;');
+				} else {
+					conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end;');
+				}
 				main.shadowRoot.querySelector('cib-action-bar').setAttribute('style', 'max-width: none;');
 			}
 			if (options.rewards) {
 				document.querySelector('#id_rh').setAttribute('style', 'display: none;');
 			}
-			const welcome = conversation.querySelector('cib-welcome-container').shadowRoot;
 			if (options.welcome) {
-				welcome.querySelector('.container-logo').setAttribute('style', 'display: none;');
-				welcome.querySelector('.container-title').setAttribute('style', 'display: none;');
-				welcome.querySelector('.container-subTitle').setAttribute('style', 'display: none;');
+				if (welcome.querySelector('.container-logo')) {
+					welcome.querySelector('.container-logo').setAttribute('style', 'display: none;');
+					welcome.querySelector('.container-title').setAttribute('style', 'display: none;');
+					welcome.querySelector('.container-subTitle').setAttribute('style', 'display: none;');
+				} else {
+					welcome.querySelector('.header').setAttribute('style', 'display: none;');
+				}
 			}
 			if (options.examples) {
-				welcome.querySelector('.container-item').setAttribute('style', 'display: none;');
+				if (welcome.querySelector('.container-item')) {
+					welcome.querySelector('.container-item').setAttribute('style', 'display: none;');
+				} else {
+					welcome.querySelector('.container-items').setAttribute('style', 'display: none;');
+				}
 			}
 			if (options.feedback) {
-				welcome.querySelector('.learn-tag-item').setAttribute('style', 'display: none;');
+				if (welcome.querySelector('.learn-tag-item')) {
+					welcome.querySelector('.learn-tag-item').setAttribute('style', 'display: none;');
+				} else {
+					welcome.querySelector('.learn-message').setAttribute('style', 'display: none;');
+				}
 				main.shadowRoot.querySelector('cib-serp-feedback').setAttribute('style', 'display: none;');
 			}
 			if (options.terms) {
-				welcome.querySelector('.privacy-statement').setAttribute('style', 'display: none;');
+				if (welcome.querySelector('.privacy-statement')) {
+					welcome.querySelector('.privacy-statement').setAttribute('style', 'display: none;');
+				} else {
+					welcome.querySelector('.legal-items').setAttribute('style', 'display: none;');
+				}
 			}
 			if (options.background) {
 				const setColor = element => {
