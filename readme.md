@@ -1,7 +1,5 @@
 # ![Icon](package/icon-48.png) [Bing AI Plus](https://chrome.google.com/webstore/detail/bing-ai-plus/fidegdolhcippkeobljodnicbeecghlm)
 
-[![Chrome](https://img.shields.io/chrome-web-store/users/fidegdolhcippkeobljodnicbeecghlm?color=black&label=Number%20of%20installations:)](https://chrome.google.com/webstore/detail/bing-ai-plus/fidegdolhcippkeobljodnicbeecghlm)
-
 Adds many features and gives options to the new Bing AI chatbot (ChatGPT v4).
 
 ## Browser extensions
