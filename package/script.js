@@ -19,13 +19,14 @@ const interval = setInterval(() => {
 		chrome.storage.sync.get({
 			query: true,
 			activity: true,
+			limit: true,
 			center: true,
 			rewards: true,
 			welcome: true,
 			examples: true,
 			feedback: true,
 			terms: true,
-			background: true
+			theme: 'default'
 		}, options => {
 			if (options.query && query && parameters.get('showconv') && query !== 'Bing AI') {
 				input.value = query;
@@ -53,52 +54,34 @@ const interval = setInterval(() => {
 					}
 				});
 			}
+			if (options.limit) {
+				input.removeAttribute('maxlength');
+				bar.shadowRoot.querySelector('.letter-counter').innerHTML = '';
+			}
 			const conversation = main.shadowRoot.querySelector('cib-conversation').shadowRoot;
 			const welcome = conversation.querySelector('cib-welcome-container').shadowRoot;
 			if (options.center) {
 				conversation.querySelector('.scroller-positioner').setAttribute('style', 'max-width: none;');
-				if (welcome.querySelector('.container-logo')) {
-					conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end; padding-bottom: 0;');
-				} else {
-					conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end;');
-				}
+				conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end;');
 				main.shadowRoot.querySelector('cib-action-bar').setAttribute('style', 'max-width: none;');
 			}
 			if (options.rewards) {
-				document.querySelector('#id_rh').setAttribute('style', 'display: none;');
+				document.querySelector('#id_rh') && document.querySelector('#id_rh').setAttribute('style', 'display: none;');
 			}
 			if (options.welcome) {
-				if (welcome.querySelector('.container-logo')) {
-					welcome.querySelector('.container-logo').setAttribute('style', 'display: none;');
-					welcome.querySelector('.container-title').setAttribute('style', 'display: none;');
-					welcome.querySelector('.container-subTitle').setAttribute('style', 'display: none;');
-				} else {
-					welcome.querySelector('.header').setAttribute('style', 'display: none;');
-				}
+				welcome.querySelector('.header') && welcome.querySelector('.header').setAttribute('style', 'display: none;');
 			}
 			if (options.examples) {
-				if (welcome.querySelector('.container-item')) {
-					welcome.querySelector('.container-item').setAttribute('style', 'display: none;');
-				} else {
-					welcome.querySelector('.container-items').setAttribute('style', 'display: none;');
-				}
+				welcome.querySelector('.container-items') && welcome.querySelector('.container-items').setAttribute('style', 'display: none;');
 			}
 			if (options.feedback) {
-				if (welcome.querySelector('.learn-tag-item')) {
-					welcome.querySelector('.learn-tag-item').setAttribute('style', 'display: none;');
-				} else {
-					welcome.querySelector('.learn-message').setAttribute('style', 'display: none;');
-				}
-				main.shadowRoot.querySelector('cib-serp-feedback').setAttribute('style', 'display: none;');
+				welcome.querySelector('.disclaimer') && welcome.querySelector('.disclaimer').setAttribute('style', 'display: none;');
+				main.shadowRoot.querySelector('cib-serp-feedback') && main.shadowRoot.querySelector('cib-serp-feedback').setAttribute('style', 'display: none;');
 			}
 			if (options.terms) {
-				if (welcome.querySelector('.privacy-statement')) {
-					welcome.querySelector('.privacy-statement').setAttribute('style', 'display: none;');
-				} else {
-					welcome.querySelector('.legal-items').setAttribute('style', 'display: none;');
-				}
+				welcome.querySelector('.legal-items') && welcome.querySelector('.legal-items').setAttribute('style', 'display: none;');
 			}
-			if (options.background) {
+			if (options.theme === 'light-app') {
 				const setColor = element => {
 					element.setAttribute('style', 'background: #f5f5f5;');
 				};
