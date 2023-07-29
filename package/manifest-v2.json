@@ -1,4 +1,5 @@
 {
+    "name": "Bing AI Plus",
     "background": {
         "scripts": [
             "background.js"
