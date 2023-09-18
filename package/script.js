@@ -1,12 +1,21 @@
 const parameters = (new URLSearchParams(location.search));
 const query = parameters.get('q') ? decodeURIComponent(parameters.get('q')) : false;
+const hide = (root, selector) => {
+	root.querySelector(selector) && root.querySelector(selector).setAttribute('style', 'display: none !important;');
+};
 const interval = setInterval(() => {
 	let main = document.querySelector('cib-serp');
 	let bar;
 	let text;
 	let input;
+	let conversation;
+	let welcome;
 	if (main) {
 		bar = main.shadowRoot.querySelector('cib-action-bar');
+		conversation = main.shadowRoot.querySelector('cib-conversation').shadowRoot;
+	}
+	if (conversation) {
+		welcome = conversation.querySelector('cib-welcome-container').shadowRoot;
 	}
 	if (bar) {
 		text = bar.shadowRoot.querySelector('cib-text-input');
@@ -14,9 +23,10 @@ const interval = setInterval(() => {
 	if (text) {
 		input = text.shadowRoot.querySelector('#searchbox');
 	}
-	if (input) {
+	if (welcome && input) {
 		clearInterval(interval);
 		chrome.storage.sync.get({
+			style: true,
 			query: true,
 			activity: true,
 			limit: true,
@@ -26,12 +36,20 @@ const interval = setInterval(() => {
 			examples: true,
 			feedback: true,
 			terms: true,
+			magnifier: true,
 			theme: 'default'
 		}, options => {
+			if (options.style && parameters.get('style')) {
+				welcome.querySelector('cib-tone-selector').shadowRoot.querySelector('button.tone-' + parameters.get('style')).click();
+			}
 			if (options.query && query && parameters.get('showconv') && query !== 'Bing AI') {
 				input.value = query;
 				input.dispatchEvent(new Event('input'));
-				bar.shadowRoot.querySelector('.control.submit button.primary').click();
+				const button = bar.shadowRoot.querySelector('cib-icon-button[icon="send"]').shadowRoot.querySelector('button');
+				button.removeAttribute('disabled');
+				button.click();
+				parameters.set('q', 'Bing AI');
+				history.pushState({}, '', parameters.toString());
 			}
 			if (options.activity) {
 				document.querySelector('#id_sc').insertAdjacentHTML(
@@ -58,28 +76,31 @@ const interval = setInterval(() => {
 				input.removeAttribute('maxlength');
 				bar.shadowRoot.querySelector('.letter-counter').innerHTML = '';
 			}
-			const conversation = main.shadowRoot.querySelector('cib-conversation').shadowRoot;
-			const welcome = conversation.querySelector('cib-welcome-container').shadowRoot;
 			if (options.center) {
 				conversation.querySelector('.scroller-positioner').setAttribute('style', 'max-width: none;');
 				conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end;');
 				main.shadowRoot.querySelector('cib-action-bar').setAttribute('style', 'max-width: none;');
 			}
 			if (options.rewards) {
-				document.querySelector('#id_rh') && document.querySelector('#id_rh').setAttribute('style', 'display: none;');
+				hide(document, '#id_rh');
 			}
 			if (options.welcome) {
-				welcome.querySelector('.header') && welcome.querySelector('.header').setAttribute('style', 'display: none;');
+				hide(welcome, '.header');
+				hide(main.shadowRoot, '.b_wlcmHdr');
 			}
 			if (options.examples) {
-				welcome.querySelector('.container-items') && welcome.querySelector('.container-items').setAttribute('style', 'display: none;');
+				hide(welcome, '.container-items');
+				hide(main.shadowRoot, '.b_wlcmTileCont');
 			}
 			if (options.feedback) {
-				welcome.querySelector('.disclaimer') && welcome.querySelector('.disclaimer').setAttribute('style', 'display: none;');
-				main.shadowRoot.querySelector('cib-serp-feedback') && main.shadowRoot.querySelector('cib-serp-feedback').setAttribute('style', 'display: none;');
+				hide(welcome, '.disclaimer');
+				hide(main.shadowRoot, 'cib-serp-feedback');
 			}
 			if (options.terms) {
-				welcome.querySelector('.legal-items') && welcome.querySelector('.legal-items').setAttribute('style', 'display: none;');
+				hide(welcome, '.legal-items');
+			}
+			if (options.magnifier) {
+				hide(document, '.mfa_rootchat');
 			}
 			if (options.theme === 'light-app') {
 				const setColor = element => {
