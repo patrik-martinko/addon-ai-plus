@@ -10,6 +10,7 @@ Adds many features and gives options to the new Bing AI chatbot (ChatGPT v4).
 
 ## Features
 
+- Ability to automatically set of conversation style from the URL parameter named 'style'
 - Ability to automatically fill in and send the query from the URL parameter named 'q'
 
 ![query](screenshot-01-chrome.jpg)
@@ -17,6 +18,7 @@ Adds many features and gives options to the new Bing AI chatbot (ChatGPT v4).
 - Ability to hide (and show) the recent activity sidebar
 - Ability to remove the input length limit (2000, 4000, ...)
 - Ability to center the chat
+- Ability to hide the magnifier icon
 - Ability to hide the rewards icon
 - Ability to hide the welcome banner
 - Ability to hide the examples
