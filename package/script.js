@@ -49,7 +49,7 @@ const interval = setInterval(() => {
 				button.removeAttribute('disabled');
 				button.click();
 				parameters.set('q', 'Bing AI');
-				history.pushState({}, '', parameters.toString());
+				history.pushState({}, '', location.pathname + '?' + parameters.toString());
 			}
 			if (options.activity) {
 				document.querySelector('#id_sc').insertAdjacentHTML(
