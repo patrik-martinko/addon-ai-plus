@@ -86,13 +86,14 @@ const interval = setInterval(() => {
 			}
 			if (options.welcome) {
 				hide(welcome, '.header');
-				hide(main.shadowRoot, '.b_wlcmHdr');
+				hide(main, '.b_wlcmHdr');
 			}
 			if (options.examples) {
 				hide(welcome, '.container-items');
-				hide(main.shadowRoot, '.b_wlcmTileCont');
+				hide(main, '.b_wlcmTileCont');
 			}
 			if (options.feedback) {
+				hide(welcome, '.preview-container .preview-label');
 				hide(welcome, '.disclaimer');
 				hide(main.shadowRoot, 'cib-serp-feedback');
 			}
