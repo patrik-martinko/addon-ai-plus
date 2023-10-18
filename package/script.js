@@ -46,7 +46,10 @@ const interval = setInterval(() => {
 			if (options.query && query && parameters.get('showconv') && query !== 'Bing AI') {
 				input.value = query;
 				input.dispatchEvent(new Event('input'));
-				const button = bar.shadowRoot.querySelector('button[description="Submit"]');
+				let button = bar.shadowRoot.querySelector('[description="Submit"]');
+				if (button.shadowRoot) {
+					button = button.shadowRoot.querySelector('button');
+				}
 				button.removeAttribute('disabled');
 				button.click();
 				parameters.set('q', 'Bing AI');
