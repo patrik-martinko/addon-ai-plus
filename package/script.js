@@ -37,7 +37,6 @@ const interval = setInterval(() => {
 			feedback: true,
 			terms: true,
 			magnifier: true,
-			scroll: true,
 			theme: 'default'
 		}, options => {
 			if (options.style && parameters.get('style')) {
@@ -113,9 +112,6 @@ const interval = setInterval(() => {
 				};
 				setColor(main.shadowRoot.querySelector('cib-background'));
 				conversation.querySelectorAll('cib-background').forEach(element => setColor(element));
-			}
-			if (options.scroll) {
-				preventScroll
 			}
 		});
 	}
