@@ -32,6 +32,7 @@ const interval = setInterval(() => {
 			limit: true,
 			center: true,
 			rewards: true,
+			mobile: true,
 			welcome: true,
 			examples: true,
 			feedback: true,
@@ -86,6 +87,9 @@ const interval = setInterval(() => {
 			}
 			if (options.rewards) {
 				hide(document, '#id_rh');
+			}
+			if (options.mobile) {
+				hide(document, '#id_mobile');
 			}
 			if (options.welcome) {
 				hide(welcome, '.header');
