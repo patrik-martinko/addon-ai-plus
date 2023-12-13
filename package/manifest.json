@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Bing AI Plus",
-    "description": "Adds many features and gives options to the new Bing AI chatbot (ChatGPT v4).",
-    "version": "2.2.0",
+    "name": "AI Plus",
+    "description": "Adds many features and gives options to the new Bing AI chatbot & Microsoft Copilot (ChatGPT v4).",
+    "version": "3.0.0",
     "permissions": [
         "storage"
     ],
@@ -12,7 +12,8 @@
     "content_scripts": [
         {
             "matches": [
-                "https://*.bing.com/*"
+                "https://*.bing.com/*",
+                "https://copilot.microsoft.com/*"
             ],
             "js": [
                 "script.js"

@@ -1,6 +1,6 @@
-# ![Icon](package/icon-48.png) [Bing AI Plus](https://chrome.google.com/webstore/detail/fidegdolhcippkeobljodnicbeecghlm)
+# ![Icon](package/icon-48.png) [AI Plus](https://chrome.google.com/webstore/detail/fidegdolhcippkeobljodnicbeecghlm)
 
-Adds many features and gives options to the new Bing AI chatbot (ChatGPT v4).
+Adds many features and gives options to the new Bing AI chatbot & Microsoft Copilot (ChatGPT v4).
 
 ## Browser extensions
 
@@ -11,7 +11,7 @@ Adds many features and gives options to the new Bing AI chatbot (ChatGPT v4).
 ## Features
 
 - Ability to automatically set of conversation style from the URL parameter named 'style'
-- Ability to automatically fill in and send the query from the URL parameter named 'q'
+- Ability to automatically fill in and send the query from the URL parameter named 'query'
 
 ![query](screenshot-01-chrome.jpg)
 
