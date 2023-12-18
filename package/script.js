@@ -87,8 +87,20 @@ const interval = setInterval(() => {
 				});
 			}
 			if (options.limit) {
-				input.removeAttribute('maxlength');
-				bar.shadowRoot.querySelector('.letter-counter').innerHTML = '';
+				const removeLimit = () => {
+					input.removeAttribute('maxlength');
+					input.removeAttribute('aria-description');
+					bar.shadowRoot.querySelector('.letter-counter').innerHTML = '';
+				}
+				removeLimit();
+				const observer = new MutationObserver(list => {
+					for (const mutation of list) {
+						if (mutation.attributeName === 'maxlength' && input.getAttribute('maxlength')) {
+							removeLimit();
+						}
+					}
+				});
+				observer.observe(input, { attributes: true });
 			}
 			if (options.center) {
 				conversation.querySelector('.scroller-positioner').setAttribute('style', 'max-width: none;');
