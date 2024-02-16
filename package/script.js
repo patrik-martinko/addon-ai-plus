@@ -28,17 +28,18 @@ const interval = setInterval(() => {
 		chrome.storage.sync.get({
 			style: true,
 			query: true,
-			activity: true,
+			sidebar: true,
+			sidebarInit: true,
 			limit: true,
 			center: true,
+			background: true,
 			logo: true,
-			rewards: true,
-			mobile: true,
 			welcome: true,
 			examples: true,
+			mobile: true,
 			feedback: true,
 			terms: true,
-			theme: true
+			rewards: true,
 		}, options => {
 			if (options.style && parameters.get('style')) {
 				welcome.querySelector('cib-tone-selector').shadowRoot.querySelector('button.tone-' + parameters.get('style')).click();
@@ -53,20 +54,25 @@ const interval = setInterval(() => {
 				button.removeAttribute('disabled');
 				button.click();
 			}
-			if (options.activity) {
+			if (options.sidebar) {
 				const icon = '<g color="#71777d"><path fill="currentcolor" d="M14.97 16.95 10 13.87V7h2v5.76l4.03 2.49-1.06 1.7zM22 12c0 5.51-4.49 10-10 10S2 17.51 2 12h1c0 4.96 4.04 9 9 9s9-4.04 9-9-4.04-9-9-9C8.81 3 5.92 4.64 4.28 7.38c-.11.18-.22.37-.31.56L3.94 8H8v1H1.96V3h1v4.74c.04-.09.07-.17.11-.25.11-.22.23-.42.35-.63C5.22 3.86 8.51 2 12 2c5.51 0 10 4.49 10 10z"></path></g>';
 				if (location.host === 'www.bing.com') {
-					document.querySelector('#id_sc').insertAdjacentHTML('beforebegin', `<svg id="activity" style="width: 34px; height: 34px; padding: 8px 0px 10px 20px; cursor: pointer;" viewBox="0 0 24 24">${icon}</svg>`);
+					document.querySelector('#id_sc').insertAdjacentHTML('beforebegin', `<svg id="sidebar-button" style="width: 34px; height: 34px; padding: 8px 0px 10px 20px; cursor: pointer;" viewBox="0 0 24 24">${icon}</svg>`);
 				} else {
-					document.querySelector('#id_h').insertAdjacentHTML('afterbegin', `<svg id="activity" style="width: 24px; height: 24px; padding: 13px; cursor: pointer;">${icon}</svg>`);
+					document.querySelector('#id_h').insertAdjacentHTML('afterbegin', `<svg id="sidebar-button" style="width: 24px; height: 24px; padding: 13px; cursor: pointer;">${icon}</svg>`);
 				}
-				const button = document.querySelector('#activity');
+				const button = document.querySelector('#sidebar-button');
 				const panel = main.shadowRoot.querySelector('cib-side-panel');
-				main.setAttribute('style', '--side-panel-width: 0px;');
-				panel.setAttribute('style', 'display: none;');
-				if (location.host === 'www.bing.com') {
-					document.querySelector('header').setAttribute('style', 'margin-right: 0px;');
-					document.querySelector('#id_h').setAttribute('style', 'right: 10px;');
+				const hidePanel = () => {
+					main.setAttribute('style', '--side-panel-width: 0px;');
+					panel.setAttribute('style', 'display: none;');
+					if (location.host === 'www.bing.com') {
+						document.querySelector('header').setAttribute('style', 'margin-right: 0px;');
+						document.querySelector('#id_h').setAttribute('style', 'right: 10px;');
+					}
+				}
+				if (!options.sidebarInit || (options.sidebarInit && query)) {
+					hidePanel();
 				}
 				button.addEventListener('click', () => {
 					if (main.getAttribute('style')) {
@@ -77,12 +83,7 @@ const interval = setInterval(() => {
 							document.querySelector('#id_h').removeAttribute('style');
 						}
 					} else {
-						main.setAttribute('style', '--side-panel-width: 0px;');
-						panel.setAttribute('style', 'display: none;');
-						if (location.host === 'www.bing.com') {
-							document.querySelector('header').setAttribute('style', 'margin-right: 0px;');
-							document.querySelector('#id_h').setAttribute('style', 'right: 10px;');
-						}
+						hidePanel();
 					}
 				});
 			}
@@ -107,6 +108,18 @@ const interval = setInterval(() => {
 				conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end;');
 				main.shadowRoot.querySelector('cib-action-bar').setAttribute('style', 'max-width: none;');
 			}
+			if (options.background) {
+				const setColor = element => {
+					element.setAttribute('style', 'background: white;');
+				};
+				setColor(main.shadowRoot.querySelector('cib-background'));
+				conversation.querySelectorAll('cib-background').forEach(element => setColor(element));
+				setColor(main.shadowRoot.querySelector('cib-side-panel').shadowRoot.querySelector('.scroller'));
+			}
+			if (options.logo) {
+				hide(document, '#sb_form');
+				document.querySelector('.b_scopebar') && document.querySelector('.b_scopebar').setAttribute('style', 'padding-left: 32px;');
+			}
 			if (options.welcome) {
 				hide(welcome, '.header');
 				hide(main, '.b_wlcmHdr');
@@ -114,6 +127,11 @@ const interval = setInterval(() => {
 			if (options.examples) {
 				hide(welcome, '.container-items');
 				hide(main, '.b_wlcmTileCont');
+				hide(main, '.b_wlcmCont');
+			}
+			if (options.mobile) {
+				hide(document, '#id_mobile');
+				hide(document, '#copilot_app_cta');
 			}
 			if (options.feedback) {
 				hide(welcome, '.preview-container .preview-label');
@@ -123,24 +141,8 @@ const interval = setInterval(() => {
 			if (options.terms) {
 				hide(welcome, '.legal-items');
 			}
-			if (location.host === 'www.bing.com') {
-				if (options.theme) {
-					const setColor = element => {
-						element.setAttribute('style', 'background: #f5f5f5;');
-					};
-					setColor(main.shadowRoot.querySelector('cib-background'));
-					conversation.querySelectorAll('cib-background').forEach(element => setColor(element));
-				}
-				if (options.rewards) {
-					hide(document, '#id_rh');
-				}
-				if (options.mobile) {
-					hide(document, '#id_mobile');
-				}
-			} else {
-				if (options.logo) {
-					hide(document, '#sb_form');
-				}
+			if (options.rewards) {
+				hide(document, '#id_rh');
 			}
 		});
 	}
