@@ -15,10 +15,11 @@ Adds many features and gives options to the new Bing AI chatbot & Microsoft Copi
 - Ability to hide (and show) the recent activity sidebar
 - Ability to remove the input length limit (2000, 4000, ...)
 - Ability to center the chat
+- Ability to set the background to white
 - Ability to hide the logo
 - Ability to hide the rewards icon
 - Ability to hide the welcome banner
 - Ability to hide the examples
 - Ability to hide the feedback text and links
 - Ability to hide the terms & privacy links
-- Ability to change the appearance
+- Ability to hide the get Pro button

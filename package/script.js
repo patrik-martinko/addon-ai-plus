@@ -40,6 +40,7 @@ const interval = setInterval(() => {
 			feedback: true,
 			terms: true,
 			rewards: true,
+			pro: true
 		}, options => {
 			if (options.style && parameters.get('style')) {
 				welcome.querySelector('cib-tone-selector').shadowRoot.querySelector('button.tone-' + parameters.get('style')).click();
@@ -91,7 +92,6 @@ const interval = setInterval(() => {
 				const removeLimit = () => {
 					input.removeAttribute('maxlength');
 					input.removeAttribute('aria-description');
-					bar.shadowRoot.querySelector('.letter-counter').innerHTML = '';
 				}
 				removeLimit();
 				const observer = new MutationObserver(list => {
@@ -103,47 +103,75 @@ const interval = setInterval(() => {
 				});
 				observer.observe(input, { attributes: true });
 			}
-			if (options.center) {
-				conversation.querySelector('.scroller-positioner').setAttribute('style', 'max-width: none;');
-				conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end;');
-				main.shadowRoot.querySelector('cib-action-bar').setAttribute('style', 'max-width: none;');
-			}
-			if (options.background) {
-				const setColor = element => {
-					element.setAttribute('style', 'background: white;');
-				};
-				setColor(main.shadowRoot.querySelector('cib-background'));
-				conversation.querySelectorAll('cib-background').forEach(element => setColor(element));
-				setColor(main.shadowRoot.querySelector('cib-side-panel').shadowRoot.querySelector('.scroller'));
-			}
 			if (options.logo) {
 				hide(document, '#sb_form');
 				document.querySelector('.b_scopebar') && document.querySelector('.b_scopebar').setAttribute('style', 'padding-left: 32px;');
-			}
-			if (options.welcome) {
-				hide(welcome, '.header');
-				hide(main, '.b_wlcmHdr');
-			}
-			if (options.examples) {
-				hide(welcome, '.container-items');
-				hide(main, '.b_wlcmTileCont');
-				hide(main, '.b_wlcmCont');
 			}
 			if (options.mobile) {
 				hide(document, '#id_mobile');
 				hide(document, '#copilot_app_cta');
 			}
-			if (options.feedback) {
-				hide(welcome, '.preview-container .preview-label');
-				hide(welcome, '.disclaimer');
-				hide(main.shadowRoot, 'cib-serp-feedback');
-			}
-			if (options.terms) {
-				hide(welcome, '.legal-items');
-			}
 			if (options.rewards) {
 				hide(document, '#id_rh');
 			}
+			const setMain = () => {
+				if (main.getAttribute('mode') === 'conversation') {
+					bar = main.shadowRoot.querySelector('cib-action-bar');
+					conversation = main.shadowRoot.querySelector('cib-conversation').shadowRoot;
+					welcome = conversation.querySelector('cib-welcome-container').shadowRoot;
+					if (options.center) {
+						conversation.querySelector('.scroller-positioner').setAttribute('style', 'max-width: none;');
+						conversation.querySelector('cib-welcome-container').setAttribute('style', 'justify-content: end;');
+						main.shadowRoot.querySelector('cib-action-bar').setAttribute('style', 'max-width: none;');
+					}
+					if (options.background) {
+						const side = main.shadowRoot.querySelector('cib-side-panel');
+						const setBackground = (element, selectorRoot, selector) => {
+							if (selectorRoot) {
+								element.shadowRoot.querySelector(selectorRoot).shadowRoot.querySelectorAll(selector).forEach(element => element.setAttribute('style', 'background: white;'));
+							} else {
+								element.shadowRoot.querySelectorAll(selector).forEach(element => element.setAttribute('style', 'background: white;'));
+							}
+						};
+						setBackground(side, null, '.scroller');
+						setObserver(side, 'selected-panel');
+						setBackground(main, null, 'cib-background');
+						setBackground(main, 'cib-conversation', 'cib-background');
+					}
+					if (options.welcome) {
+						hide(welcome, '.header');
+						hide(main, '.b_wlcmHdr');
+					}
+					if (options.examples) {
+						hide(welcome, '.container-items');
+						hide(main, '.b_wlcmTileCont');
+						hide(main, '.b_wlcmCont');
+					}
+					if (options.feedback) {
+						hide(welcome, '.preview-container .preview-label');
+						hide(welcome, '.disclaimer');
+						hide(main.shadowRoot, 'cib-serp-feedback');
+					}
+					if (options.terms) {
+						hide(welcome, '.legal-items');
+					}
+					if (options.pro) {
+						hide(welcome, '.get-ccp-button');
+					}
+				}
+			};
+			const setObserver = (element, attribute) => {
+				const observer = new MutationObserver(records => {
+					for (const record of records) {
+						if (record.attributeName === attribute) {
+							setMain();
+						}
+					}
+				});
+				observer.observe(element, { attributes: true });
+			};
+			setMain();
+			setObserver(main, 'mode');
 		});
 	}
 }, 500);

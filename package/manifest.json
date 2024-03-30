@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "AI Plus",
     "description": "Adds many features and gives options to the new Bing AI chatbot & Microsoft Copilot (ChatGPT v4).",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "permissions": [
         "storage"
     ],
