@@ -2,7 +2,7 @@
 
 Adds many features and gives options to Microsoft Copilot / Bing AI (ChatGPT v4).
 
-## Addons
+## Add-ons
 
 [Chrome](https://chrome.google.com/webstore/detail/fidegdolhcippkeobljodnicbeecghlm) | [Firefox](https://addons.mozilla.org/en-US/firefox/addon/ai-plus) |
 -- | --
