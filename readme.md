@@ -1,6 +1,6 @@
 # ![Icon](package/icon-48.png) [AI Plus](https://chrome.google.com/webstore/detail/fidegdolhcippkeobljodnicbeecghlm)
 
-Adds many features and gives options to the new Bing AI chatbot & Microsoft Copilot (ChatGPT v4).
+Adds many features and gives options to Microsoft Copilot / Bing AI (ChatGPT v4).
 
 ## Addons
 
