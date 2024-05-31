@@ -65,7 +65,7 @@ const interval = setInterval(() => {
 				const button = document.querySelector('#sidebar-button');
 				const panel = main.shadowRoot.querySelector('cib-side-panel');
 				const hidePanel = () => {
-					main.setAttribute('style', '--side-panel-width: 0px;');
+					main.setAttribute('style', main.setAttribute('style') + ' --side-panel-width: 0px;');
 					panel.setAttribute('style', 'display: none;');
 					document.querySelector('header').setAttribute('style', 'margin-right: 0px;');
 					document.querySelector('#id_h').setAttribute('style', 'right: 15px;');
@@ -74,8 +74,8 @@ const interval = setInterval(() => {
 					hidePanel();
 				}
 				button.addEventListener('click', () => {
-					if (main.getAttribute('style')) {
-						main.removeAttribute('style');
+					if (panel.getAttribute('style')) {
+						main.setAttribute('style', main.setAttribute('style').replace(' --side-panel-width: 0px;', ''));
 						panel.removeAttribute('style');
 						document.querySelector('header').removeAttribute('style');
 						document.querySelector('#id_h').removeAttribute('style');
