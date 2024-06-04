@@ -43,7 +43,10 @@ const interval = setInterval(() => {
 			pro: true
 		}, options => {
 			if (options.style && parameters.get('style')) {
-				welcome.querySelector('cib-tone-selector').shadowRoot.querySelector('button.tone-' + parameters.get('style')).click();
+				const button = welcome.querySelector('cib-tone-selector') && welcome.querySelector('cib-tone-selector').shadowRoot.querySelector('button.tone-' + parameters.get('style'));
+				if (button) {
+					button.click();
+				}
 			}
 			if (options.query && query && ((parameters.get('showconv') && query !== 'Bing AI') || location.host !== 'www.bing.com')) {
 				input.value = query;
